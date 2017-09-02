@@ -1,1 +1,4 @@
-Golang playground.
+### Golang playground.
+
+#### Installation:
+`dep ensure`
