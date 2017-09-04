@@ -53,9 +53,9 @@ var SimplexNoise = func(frequency, threshold float64, seed int64) algoFuncBasic 
 	var noise = opensimplex.NewWithSeed(seed)
 	return func(w, h, x, y int) uint16 {
 		var random = (noise.Eval2(frequency*float64(x), frequency*float64(y)) + 1) / 2
-
 		if threshold < 0 {
-			return uint16(random * MAX_COLOR_VALUE) % MAX_COLOR_VALUE
+			var result = uint16(random * MAX_COLOR_VALUE)
+			return result
 		} else {
 			if random > threshold {
 				return MAX_COLOR_VALUE
@@ -69,13 +69,18 @@ var SimplexNoise = func(frequency, threshold float64, seed int64) algoFuncBasic 
 var SimplexNoiseOctaves = func(frequency, threshold float64, seed int64, octaves int) algoFuncBasic {
 	var simplex = SimplexNoise(frequency, threshold, seed)
 	return func(w, h, x, y int) uint16 {
-		var res float64
+		var result float64
 		var step float64 = 1.0
+		var stepSum = 0.0
 		for i := octaves; i > 0; i-- {
-			res += step * float64(simplex(w, h, int(1/step)*x, int(1/step)*y))
+			result += step * float64(simplex(w, h, int(1/step)*x, int(1/step)*y))
+			stepSum += step
 			step /= 2
 		}
-		return uint16(res)
+		if stepSum > 0 {
+			result /= stepSum
+		}
+		return uint16(result)
 	}
 }
 

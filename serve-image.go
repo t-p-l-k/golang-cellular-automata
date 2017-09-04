@@ -5,12 +5,12 @@ import (
 	"net/http"
 	"strconv"
 	"fmt"
-	"time"
 )
 
 func InitServer() {
 	var generator = GenerateImage
 	http.Handle("/", http.FileServer(http.Dir("./static")))
+
 	http.HandleFunc(
 		"/VerticalGradient",
 		generateImageResponse(
@@ -50,14 +50,14 @@ func InitServer() {
 		"/SimplexNoise",
 		generateImageResponse(
 			generator,
-			ConvertToGray16AlgoFunc(SimplexNoise(0.1, 0.5, time.Now().UnixNano())),
+			ConvertToGray16AlgoFunc(SimplexNoise(0.1, -1, 0)),
 		),
 	)
 	http.HandleFunc(
 		"/SimplexNoiseOctaves",
 		generateImageResponse(
 			generator,
-			ConvertToGray16AlgoFunc(SimplexNoiseOctaves(0.01, -1, time.Now().UnixNano(), 8)),
+			ConvertToGray16AlgoFunc(SimplexNoiseOctaves(0.1, -1, 0, 4)),
 		),
 	)
 	http.HandleFunc(
