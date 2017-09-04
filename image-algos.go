@@ -3,7 +3,6 @@ package main
 import (
 	"image/color"
 	"github.com/ojrac/opensimplex-go"
-	"time"
 )
 
 const MAX_COLOR_VALUE = 65535
@@ -49,9 +48,19 @@ var CryptoRandomThreshold = func(threshold float64) algoFuncBasic {
 	}
 }
 
-var SimplexNoise = func() algoFuncBasic {
-	var noise = opensimplex.NewWithSeed(time.Now().UnixNano())
+var SimplexNoise = func(frequency, threshold float64, seed int64) algoFuncBasic {
+	var noise = opensimplex.NewWithSeed(seed)
 	return func(w, h, x, y int) uint16 {
-		return uint16((noise.Eval2(float64(x), float64(y)) + 1) / 2 * MAX_COLOR_VALUE)
+		var random = (noise.Eval2(frequency*float64(x), frequency*float64(y)) + 1) / 2
+
+		if threshold < 0 {
+			return uint16(random * MAX_COLOR_VALUE) % MAX_COLOR_VALUE
+		} else {
+			if random > threshold {
+				return MAX_COLOR_VALUE
+			} else {
+				return 0
+			}
+		}
 	}
 }

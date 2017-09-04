@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 	"fmt"
+	"time"
 )
 
 func InitServer() {
@@ -49,7 +50,7 @@ func InitServer() {
 		"/SimplexNoise",
 		generateImageResponse(
 			generator,
-			ConvertToGray16AlgoFunc(SimplexNoise()),
+			ConvertToGray16AlgoFunc(SimplexNoise(0.1, 0.5, time.Now().UnixNano())),
 		),
 	)
 
