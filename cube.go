@@ -24,7 +24,7 @@ func init() {
 	runtime.LockOSThread()
 }
 
-func Run() {
+func RenderCube() {
 	if err := glfw.Init(); err != nil {
 		log.Fatalln("failed to initialize glfw:", err)
 	}
