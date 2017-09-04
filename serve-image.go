@@ -50,21 +50,21 @@ func InitServer() {
 		"/SimplexNoise",
 		generateImageResponse(
 			generator,
-			ConvertToGray16AlgoFunc(SimplexNoise(0.1, -1, 0)),
+			ConvertToGray16AlgoFunc(SimplexNoise(0.025, 0.35, 0.65, 0)),
 		),
 	)
 	http.HandleFunc(
 		"/SimplexNoiseOctaves",
 		generateImageResponse(
 			generator,
-			ConvertToGray16AlgoFunc(SimplexNoiseOctaves(0.1, -1, 0, 4)),
+			ConvertToGray16AlgoFunc(SimplexNoiseOctaves(0.025, 0.35, 0.65, 0, 4)),
 		),
 	)
 	http.HandleFunc(
 		"/SimplexNoiseRedistribution",
 		generateImageResponse(
 			generator,
-			ConvertToGray16AlgoFunc(SimplexNoiseRedistribution(0.1, -1, 0, 4, 1.05)),
+			ConvertToGray16AlgoFunc(SimplexNoiseRedistribution(0.025, 0.35, 0.65, 0, 4, 1.02)),
 		),
 	)
 
