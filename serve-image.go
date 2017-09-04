@@ -53,6 +53,13 @@ func InitServer() {
 			ConvertToGray16AlgoFunc(SimplexNoise(0.1, 0.5, time.Now().UnixNano())),
 		),
 	)
+	http.HandleFunc(
+		"/SimplexNoiseOctaves",
+		generateImageResponse(
+			generator,
+			ConvertToGray16AlgoFunc(SimplexNoiseOctaves(0.01, -1, time.Now().UnixNano(), 8)),
+		),
+	)
 
 	err := http.ListenAndServe(":80", nil)
 	if err != nil {

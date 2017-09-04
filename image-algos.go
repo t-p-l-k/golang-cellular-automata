@@ -64,3 +64,16 @@ var SimplexNoise = func(frequency, threshold float64, seed int64) algoFuncBasic 
 		}
 	}
 }
+
+var SimplexNoiseOctaves = func(frequency, threshold float64, seed int64, octaves int) algoFuncBasic {
+	var simplex = SimplexNoise(frequency, threshold, seed)
+	return func(w, h, x, y int) uint16 {
+		var res float64
+		var step float64 = 1.0
+		for i := octaves; i > 0; i-- {
+			res += step * float64(simplex(w, h, int(1/step)*x, int(1/step)*y))
+			step /= 2
+		}
+		return uint16(res)
+	}
+}
