@@ -61,7 +61,7 @@ func InitServer() {
 		),
 	)
 
-	err := http.ListenAndServe(":80", nil)
+	err := http.ListenAndServe(":2017", nil)
 	if err != nil {
 		fmt.Println(err)
 	}
