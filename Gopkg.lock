@@ -3,37 +3,13 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/go-gl/gl"
-  packages = ["v4.1-core/gl"]
-  revision = "39ef8e959f4050148ec5a59816a93b9e65b4528f"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/go-gl/glfw"
-  packages = ["v3.2/glfw"]
-  revision = "513e4f2bf85c31fba0fc4907abd7895242ccbe50"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/go-gl/mathgl"
-  packages = ["mgl32"]
-  revision = "9e3ea3e806141087fbb83a8a8e7038bf73eff120"
-
-[[projects]]
-  branch = "master"
   name = "github.com/ojrac/opensimplex-go"
   packages = ["."]
   revision = "c0d2b8b324684d1e69e72eaf01f69ff700e3396a"
 
-[[projects]]
-  branch = "master"
-  name = "golang.org/x/image"
-  packages = ["math/f32"]
-  revision = "426cfd8eeb6e08ab1932954e09e3c2cb2bc6e36d"
-
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "fa135f10fce0626a6624084cc8994923a1c540972255b65b9b3d7a600c40dab4"
+  inputs-digest = "d6189175ec1314bc94fde33012cece2c8dab0e86ccb678bf36120567fa3ae7b4"
   solver-name = "gps-cdcl"
   solver-version = 1
