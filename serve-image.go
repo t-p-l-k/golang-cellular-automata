@@ -60,6 +60,13 @@ func InitServer() {
 			ConvertToGray16AlgoFunc(SimplexNoiseOctaves(0.01, -1, time.Now().UnixNano(), 8)),
 		),
 	)
+	http.HandleFunc(
+		"/SimplexNoiseRedistribution",
+		generateImageResponse(
+			generator,
+			ConvertToGray16AlgoFunc(SimplexNoiseRedistribution(0.1, -1, 0, 4, 1.05)),
+		),
+	)
 
 	err := http.ListenAndServe(":2017", nil)
 	if err != nil {
@@ -67,6 +74,7 @@ func InitServer() {
 	}
 }
 
+// TODO[Dmitry Teplov] Implement image caching.
 func generateImageResponse(
 	generator func(algo algoFunc) string,
 	algoFunc algoFunc,

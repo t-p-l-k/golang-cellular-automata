@@ -3,6 +3,7 @@ package main
 import (
 	"image/color"
 	"github.com/ojrac/opensimplex-go"
+	"math"
 )
 
 const MAX_COLOR_VALUE = 65535
@@ -75,5 +76,23 @@ var SimplexNoiseOctaves = func(frequency, threshold float64, seed int64, octaves
 			step /= 2
 		}
 		return uint16(res)
+	}
+}
+
+var SimplexNoiseRedistribution = func(
+	frequency,
+	threshold float64,
+	seed int64,
+	octaves int,
+	redistribution float64,
+) algoFuncBasic {
+	var simplexOctaves = SimplexNoiseOctaves(frequency, threshold, seed, octaves)
+	return func(w, h, x, y int) uint16 {
+		var result = float64(math.Pow(float64(simplexOctaves(w, h, x, y)), redistribution))
+		if result > MAX_COLOR_VALUE {
+			return MAX_COLOR_VALUE
+		} else {
+			return uint16(result)
+		}
 	}
 }
