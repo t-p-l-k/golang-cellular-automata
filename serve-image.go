@@ -12,10 +12,10 @@ func InitServer() {
 	var generator = GenerateImage
 	http.Handle("/", http.FileServer(http.Dir("./static")))
 	http.HandleFunc(
-		"/VericalGradient",
+		"/VerticalGradient",
 		generateImageResponse(
 			generator,
-			ConvertToGray16AlgoFunc(VericalGradient),
+			ConvertToGray16AlgoFunc(VerticalGradient),
 		),
 	)
 	http.HandleFunc(

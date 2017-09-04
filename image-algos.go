@@ -17,7 +17,7 @@ func ConvertToGray16AlgoFunc(algo algoFuncBasic) algoFunc {
 	}
 }
 
-var VericalGradient algoFuncBasic = func(w, h, x, y int) uint16 {
+var VerticalGradient algoFuncBasic = func(w, h, x, y int) uint16 {
 	return uint16(float64(y) / float64(h-1) * MAX_COLOR_VALUE)
 }
 
