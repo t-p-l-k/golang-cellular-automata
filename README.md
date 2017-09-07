@@ -2,3 +2,6 @@
 
 #### Installation:
 `dep ensure`
+
+### Compiling:
+`go build`
